@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\Controller;
+
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+use \Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,7 +30,23 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    
+    protected function authenticated(Request $request, $user) {
+        if ($user->users_types_id == 1) {
+            return redirect('/categories');
+        } else if ($user->users_types_id  == 2) {
+            return redirect('/');
+        }else if ($user->users_types_id == 3) {
+            return redirect('/');
+        } else {
+            return redirect('/login');
+        }
+   }
+
+//    public function displayUsers(){
+//        $user = User::all();
+//        return view
+//    }
 
     /**
      * Create a new controller instance.

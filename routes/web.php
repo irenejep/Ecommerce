@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/categories', 'CategoryController@index');
+Route::get('categories/create', 'CategoryController@create');
+Route::post('/categories', 'CategoryController@store');
+Route::get('/categories/edit/{id}', 'CategoryController@edit');
+Route::patch('/categories/{id}', 'CategoryController@update');
+Route::get('/categories/delete/{id}', 'CategoryController@destroy');
+
