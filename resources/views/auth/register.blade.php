@@ -12,6 +12,18 @@
                         @csrf
 
                         <div class="form-group row">
+                            <label for="user_types" class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="users_types_id" id="user_types" class="form-control" required autofocus>
+                                <option value="0">---Select User Type---</option>
+                                    @foreach($user_types as $user_type)
+                                        <option value="{{$user_type->id}}">{{$user_type->user_types_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">

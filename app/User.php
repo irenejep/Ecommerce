@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\User_type;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','users_types_id'
     ];
 
     /**
@@ -27,4 +28,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function user_type(){
+        return $this->belongsTo(User_type::class);
+    }
 }
