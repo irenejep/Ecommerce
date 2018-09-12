@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Category;
+use App\Feature;
 
-class CategoryController extends Controller
+class FeatureController extends Controller
 {
 
     public function __construct(){
 
         $this->middleware('auth');
     }
+
+    public function features()
+    {
+        return $this->hasMany(Feature::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +26,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        $features = Feature::all();
+        return view('features.index', compact('features'));
 
     }
 
@@ -32,8 +38,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('categories.create', compact('categories')); 
+        $features = Feature::all();
+        return view('features.create', compact('features')); 
     }
 
     /**
@@ -45,18 +51,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[
-            'category_name'=>'required',
-            'category_parent'=>'required'
+            'feature_name'=>'required'
             ]);
 
-            // DB::table('categories')->insert(
-            //     ['parent' => $parent, 'name' => $name]
-            // );
-            Category::create(request(['category_name','category_parent']));
+            Feature::create(request(['feature_name','user_id' => auth()->id()]));
 
-            session()->flash("success_message", "You have created a new category");
+            session()->flash("success_message", "You have added a new feature");
     
-            return redirect('/categories');
+            return redirect('/features');
     }
 
     /**
@@ -78,11 +80,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $feature = Feature::find($id);
 
         session()->flash("success_message_edit", "You have edited category");
 
-        return view('categories.edit', compact('category'));
+        return view('features.edit', compact('feature'));
     }
 
     /**
@@ -97,9 +99,9 @@ class CategoryController extends Controller
         $this->validate(request(),[
 
             ]);
-            Category::where('id', $id)
-            ->update(request(['category_name','category_parent']));
-            return redirect('/categories');
+            Feature::where('id', $id)
+            ->update(request(['feature_name']));
+            return redirect('/features');
     }
 
     /**
@@ -110,11 +112,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::where('id', $id)
+        Feature::where('id', $id)
            ->delete();
 
-           session()->flash("success_message_delete", "You have sucessfully deleted category");
+           session()->flash("success_message_delete", "You have sucessfully deleted feature");
 
-        return redirect('/categories');
+        return redirect('/features');
     }
 }

@@ -31,4 +31,9 @@ class User extends Authenticatable
     public function user_type(){
         return $this->belongsTo(User_type::class);
     }
+
+    public function features(){
+
+        return $this->hasMany(Feature::class);
+    }
 }

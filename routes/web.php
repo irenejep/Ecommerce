@@ -27,7 +27,14 @@ Route::patch('/categories/{id}', 'CategoryController@update');
 Route::get('/categories/delete/{id}', 'CategoryController@destroy');
 
 Route::get('/users', 'user_typeController@index');
-Route::get('/users/delete/{id}', 'user_typeController@destroy');
+Route::delete('/users/{id}', 'user_typeController@destroy');
+
+Route::get('/features', 'FeatureController@index');
+Route::get('features/create', 'FeatureController@create');
+Route::post('/features', 'FeatureController@store');
+Route::get('/features/edit/{id}', 'FeatureController@edit');
+Route::patch('/features/{id}', 'FeatureController@update');
+Route::delete('/features/{id}', 'FeatureController@destroy');
 
 Route::get('auth/create', 'RegisterController@showRegistrationForm');
 
