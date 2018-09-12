@@ -29,11 +29,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     public function user_type(){
+        
         return $this->belongsTo(User_type::class);
     }
 
     public function features(){
 
         return $this->hasMany(Feature::class);
+    }
+
+    public function products(){
+
+        return $this->hasMany(Product::class);
     }
 }

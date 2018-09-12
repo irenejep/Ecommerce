@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layoutAdmin')
 
 @section('content')
 <a href='/categories/create' class="btn btn-warning">New Category<a>

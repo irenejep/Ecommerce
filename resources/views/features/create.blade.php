@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layoutSeller')
 
 @section('content')
 <form action="/features" method="POST">

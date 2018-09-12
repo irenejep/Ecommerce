@@ -35,7 +35,7 @@ class LoginController extends Controller
         if ($user->users_types_id == 1) {
             return redirect('/categories');
         } else if ($user->users_types_id  == 2) {
-            return redirect('/');
+            return redirect('/products');
         }else if ($user->users_types_id == 3) {
             return redirect('/');
         } else {

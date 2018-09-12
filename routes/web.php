@@ -38,3 +38,10 @@ Route::delete('/features/{id}', 'FeatureController@destroy');
 
 Route::get('auth/create', 'RegisterController@showRegistrationForm');
 
+Route::get('/products', 'ProductController@index');
+Route::get('products/create', 'ProductController@create');
+Route::post('/products', 'ProductController@store');
+Route::get('/products/edit/{id}', 'ProductController@edit');
+Route::patch('/products/{id}', 'ProductController@update');
+Route::delete('/products/{id}', 'ProductController@destroy');
+

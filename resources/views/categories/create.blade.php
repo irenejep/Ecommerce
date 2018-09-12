@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layoutAdmin')
 
 @section('content')
 <form action="/categories" method="POST">
