@@ -38,7 +38,7 @@
 
      @if($message = session("success_message_delete"))
       <div id = "form-success-delete"class ="alert alert-success">
-      {{$message}}, {{$category->category_name}}
+      {{$message}}
       </div>
     @endif
 

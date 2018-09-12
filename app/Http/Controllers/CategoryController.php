@@ -98,7 +98,7 @@ class CategoryController extends Controller
 
             ]);
             Category::where('id', $id)
-            ->update(request(['name','parent']));
+            ->update(request(['category_name','category_parent']));
             return redirect('/categories');
     }
 

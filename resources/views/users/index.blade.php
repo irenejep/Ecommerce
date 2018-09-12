@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-<a href='/categories/create' class="btn btn-warning">New Category<a>
 <table class = "table table-condensed table-striped table-bordered table-hover">
 <tr>
     <th>#</th>
@@ -20,6 +19,7 @@
         @endif
     @endforeach
     </td>
+    <td> <a href='/users/delete/{{ $user->id }}'onsubmit="return confirm('Are you sure you want to delete?')" class="btn btn-danger">Delete</a></td>
 </tr>
 @endforeach
 @endsection

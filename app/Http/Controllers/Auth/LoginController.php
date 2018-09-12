@@ -39,7 +39,7 @@ class LoginController extends Controller
         }else if ($user->users_types_id == 3) {
             return redirect('/');
         } else {
-            return redirect('/login');
+            return redirect('/');
         }
    }
 

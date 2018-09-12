@@ -19,7 +19,7 @@ class user_typeController extends Controller
     {
         $usertypes = User_type::all();
         $users = User::all();
-        return view('users', compact('usertypes', 'users'));
+        return view('users/index', compact('usertypes', 'users'));
     }
 
     /**
@@ -85,6 +85,11 @@ class user_typeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::where('id', $id)
+        ->delete();
+
+        session()->flash("success_message_delete", "You have sucessfully deleted category");
+
+     return redirect('/users');
     }
 }
