@@ -26,3 +26,6 @@ Route::get('/categories/edit/{id}', 'CategoryController@edit');
 Route::patch('/categories/{id}', 'CategoryController@update');
 Route::get('/categories/delete/{id}', 'CategoryController@destroy');
 
+Route::get('/users', 'user_typeController@index');
+Route::get('auth/create', 'RegisterController@showRegistrationForm');
+

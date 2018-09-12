@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use User_type;
+
+use App\User_type;
+
+use App\User;
 
 class user_typeController extends Controller
 {
@@ -14,8 +17,9 @@ class user_typeController extends Controller
      */
     public function index()
     {
-        // $user_types = User_type::all();
-        // return view('auth.register');
+        $user_types = User_type::all();
+        $users = User::all();
+        return view('users', compact('user_types', 'users'));
     }
 
     /**
