@@ -54,7 +54,7 @@ class FeatureController extends Controller
             'feature_name'=>'required'
             ]);
 
-            Feature::create(request(['feature_name','user_id' => auth()->id()]));
+            Feature::create(request(['feature_name','user_id']));
 
             session()->flash("success_message", "You have added a new feature");
     
