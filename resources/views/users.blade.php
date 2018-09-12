@@ -14,9 +14,9 @@
     <td>{{ $user->id }}</td>
     <td>{{ $user->name }}</td>
     <td>
-    @foreach($users as $user_types)
-        @if($user_types->id == $users->user_types_id)
-            {{ $user_types->user_types_name }}
+    @foreach ($usertypes as $usertype)
+        @if ($user->users_types_id == $usertype->id)
+            {{ $usertype->user_types_name }}
         @endif
     @endforeach
     </td>
