@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Cart;
+
 use App\Product;
+
+use Session;
 
 use App\Category;
 
@@ -16,11 +20,6 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
 
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +29,25 @@ class ProductController extends Controller
     {
         $products = Product::all();
         return view('products.index', compact('products'));
+
+    }
+
+    public function buyer()
+    {
+        $products = Product::all();
+        return view('productBuyer.index', compact('products'));
+
+    }
+
+    public function addtocart(Request $request, $id){
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        dd($request->session()->get('cart'));
+        return view('cart.index');
 
     }
 
@@ -74,7 +92,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return view('products.show', compact('product'));
     }
 
     /**

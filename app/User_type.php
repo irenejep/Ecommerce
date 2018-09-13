@@ -11,4 +11,5 @@ class User_type extends Model
     public function user(){
         return $this->hasMany(User::class);
     }
+    
 }

@@ -34,6 +34,7 @@ Route::get('features/create', 'FeatureController@create');
 Route::post('/features', 'FeatureController@store');
 Route::get('/features/edit/{id}', 'FeatureController@edit');
 Route::patch('/features/{id}', 'FeatureController@update');
+Route::get('/products/show/{id}', 'FeatureController@show');
 Route::delete('/features/{id}', 'FeatureController@destroy');
 
 Route::get('auth/create', 'RegisterController@showRegistrationForm');
@@ -42,6 +43,19 @@ Route::get('/products', 'ProductController@index');
 Route::get('products/create', 'ProductController@create');
 Route::post('/products', 'ProductController@store');
 Route::get('/products/edit/{id}', 'ProductController@edit');
+Route::get('/products/show/{id}', 'ProductController@show');
 Route::patch('/products/{id}', 'ProductController@update');
 Route::delete('/products/{id}', 'ProductController@destroy');
+Route::get('/addtocart/{id}', 'ProductController@addtocart');
+
+
+Route::get('/productfeatures/{id}', 'ProductfeatureController@index');
+Route::get('productfeatures/create', 'ProductfeatureController@create');
+Route::post('/productfeatures', 'ProductfeatureController@store');
+Route::get('/productfeatures/edit/{id}', 'ProductfeatureController@edit');
+Route::get('/productfeatures/show/{id}', 'ProductfeatureController@show');
+Route::patch('/productfeatures/{id}', 'ProductfeatureController@update');
+Route::delete('/productfeatures/{id}', 'ProductfeatureController@destroy');
+
+Route::get('/productsBuyer', 'ProductController@buyer');
 

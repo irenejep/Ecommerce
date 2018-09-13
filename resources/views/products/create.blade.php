@@ -18,8 +18,11 @@
         <input type="text" class="form-control" name="product_name"  placeholder="Enter Name of product">
     </div>
     <div class="form-group">
-        <label for="name">Status</label>
-        <input type="text" class="form-control" name="product_status"  placeholder="Enter status of product">
+        <select name="product_status" class="form-control">
+        <option value="">---Select Status---</option>
+        <option value="in_stock">In stock</option>
+        <option value="sold_out">Sold out</option>
+        </select>
     </div>
     <div class="form-group">
         <label for="name">Price</label>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 use App\User_type;
 
 use Illuminate\Notifications\Notifiable;

@@ -4,19 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Productfeature;
+
 use App\Feature;
 
-class FeatureController extends Controller
+use App\Product;
+
+class ProductfeatureController extends Controller
 {
 
     public function __construct(){
 
         $this->middleware('auth');
-    }
-
-    public function features()
-    {
-        return $this->hasMany(Feature::class);
     }
 
     /**
@@ -26,8 +25,8 @@ class FeatureController extends Controller
      */
     public function index()
     {
-        $features = Feature::all();
-        return view('features.index', compact('features'));
+        $productfeatures = Productfeature::all();
+        return view('productfeatures.index', compact('productfeatures'));
 
     }
 
@@ -38,8 +37,9 @@ class FeatureController extends Controller
      */
     public function create()
     {
-        $features = Feature::all();
-        return view('features.create', compact('features')); 
+        $products = Product::all();
+        $features= Feature::all();
+        return view('productfeatures.create', compact(['products','features'])); 
     }
 
     /**
@@ -51,14 +51,15 @@ class FeatureController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[
-            'feature_name'=>'required'
+            'product_id'=>'required',
+            'feature_id'=>'required'
             ]);
 
-            Feature::create(request(['feature_name','user_id']));
+            Productfeature::create(request(['product_id','feature_id']));
 
             session()->flash("success_message", "You have added a new feature");
     
-            return redirect('/features');
+            return redirect('/productfeatures');
     }
 
     /**
@@ -81,11 +82,11 @@ class FeatureController extends Controller
      */
     public function edit($id)
     {
-        $feature = Feature::find($id);
+        $feature = Productfeature::find($id);
 
         session()->flash("success_message_edit", "You have edited category");
 
-        return view('features.edit', compact('feature'));
+        return view('productfeatures.edit', compact('feature'));
     }
 
     /**
@@ -100,9 +101,9 @@ class FeatureController extends Controller
         $this->validate(request(),[
 
             ]);
-            Feature::where('id', $id)
-            ->update(request(['feature_name']));
-            return redirect('/features');
+            Productfeature::where('id', $id)
+            ->update(request(['feature_id','product_id']));
+            return redirect('/productfeatures');
     }
 
     /**
@@ -113,11 +114,11 @@ class FeatureController extends Controller
      */
     public function destroy($id)
     {
-        Feature::where('id', $id)
+        Productfeature::where('id', $id)
            ->delete();
 
            session()->flash("success_message_delete", "You have sucessfully deleted feature");
 
-        return redirect('/features');
+        return redirect('/productfeatures');
     }
 }

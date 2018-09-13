@@ -12,4 +12,9 @@ class Feature extends Model
 
         return $this->belongsTo(User::class);
     }
+
+    public function productfeatures(){
+
+        return $this->hasMany(Productfeature::class);
+    }
 }
