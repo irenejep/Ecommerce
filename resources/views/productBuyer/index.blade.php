@@ -1,4 +1,4 @@
-@extends('layouts.layoutSeller')
+@extends('layouts.layoutBuyer')
 
 @section('content')
 <table class = "table table-condensed table-striped table-bordered table-hover">

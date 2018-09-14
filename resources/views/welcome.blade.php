@@ -78,7 +78,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Login or register to continue
                 </div>
 
                 <div class="links">

@@ -26,6 +26,7 @@ class ProductfeatureController extends Controller
     public function index()
     {
         $productfeatures = Productfeature::all();
+        dd($productfeatures);
         return view('productfeatures.index', compact('productfeatures'));
 
     }
@@ -70,8 +71,8 @@ class ProductfeatureController extends Controller
      */
     public function show(Product $id)
     {
-        $feature = Product::find($id)->where ('id', $id->product_id);
-        return view('features.index', compact('feature'));
+        $productfeature = Productfeature::find($id)->where ('id', $id->product_id);
+        return view('productfeatures.show', compact('productfeature'));
     }
 
     /**
@@ -82,11 +83,14 @@ class ProductfeatureController extends Controller
      */
     public function edit($id)
     {
+        $products = Product::all();
+        $features= Feature::all();
         $feature = Productfeature::find($id);
+        $product = Productfeature::find($id);
 
         session()->flash("success_message_edit", "You have edited category");
 
-        return view('productfeatures.edit', compact('feature'));
+        return view('productfeatures.edit', compact('feature', 'products', 'product', 'features'));
     }
 
     /**

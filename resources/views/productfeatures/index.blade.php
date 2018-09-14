@@ -5,12 +5,14 @@
 <table class = "table table-condensed table-striped table-bordered table-hover">
 <tr>
     <th>#</th>
+    <th>Product</th>
     <th>Feature</th>
     <th colspan="3">Actions</th>
 </tr>
 @foreach($productfeatures as $productfeature)
 <tr>
     <td>{{ $productfeature->id }}</td>
+    <td>{{$productfeature->product->feature_name}}</td>
     <td>{{$productfeature->feature->feature_name}}</td>
     <td> <a href='/productfeatures/edit/{{ $productfeature->id }}' class="btn btn-primary">Edit</a></td>
     <td> 

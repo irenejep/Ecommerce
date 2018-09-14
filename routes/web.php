@@ -49,7 +49,7 @@ Route::delete('/products/{id}', 'ProductController@destroy');
 Route::get('/addtocart/{id}', 'ProductController@addtocart');
 
 
-Route::get('/productfeatures/{id}', 'ProductfeatureController@index');
+Route::get('/productfeatures', 'ProductfeatureController@index');
 Route::get('productfeatures/create', 'ProductfeatureController@create');
 Route::post('/productfeatures', 'ProductfeatureController@store');
 Route::get('/productfeatures/edit/{id}', 'ProductfeatureController@edit');
