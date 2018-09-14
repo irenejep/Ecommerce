@@ -45,8 +45,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[
-            'category_name'=>'required',
-            'category_parent'=>'required'
+            'category_name'=>'required'
             ]);
 
             // DB::table('categories')->insert(
