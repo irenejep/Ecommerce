@@ -10,7 +10,11 @@ use App\Product;
 
 use Session;
 
+use DB;
+
 use App\Category;
+
+use App\Order_item;
 
 class ProductController extends Controller
 {
@@ -32,23 +36,42 @@ class ProductController extends Controller
 
     }
 
+    public function quantity(){
+        $qty = DB::table('order_items')
+        ->where('product_id', 2)
+        ->count();
+    }
+
     public function buyer()
     {
         $products = Product::all();
-        return view('productBuyer.index', compact('products'));
+        $orderitems=Order_item::all();
+        $totalItems = DB::table('order_items')
+        ->count();
+
+        $quantity = DB::table('order_items')
+        ->orderBy('product_id')
+        ->count();
+        // dd($quantity);
+       
+
+        return view('productBuyer.indx', compact('products', 'totalItems', 'quantity'));
 
     }
 
     public function addtocart(Request $request, $id){
+        $products = Product::all();
+        $orderitems=Order_item::all();
         $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart'):null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        dd($request->session()->get('cart'));
-        return view('cart.index');
 
+      
+        // dd($request->session()->get('cart'));
+        return view('cart.index', compact('cart', 'product','products', 'totalItem', 'orderitems'));
     }
 
     /**
@@ -82,8 +105,22 @@ class ProductController extends Controller
             session()->flash("success_message", "You have added a new products");
     
             return redirect('/products');
+            
     }
 
+    public function viewcart($id)
+    {
+        $products = Product::all();
+        $quantity = Order_item::orderBy('product_id')->get();
+        $quantity = $quantity->groupBy(function ($member) {
+        return $member->product_id;
+        })->all();
+        foreach ($quantity as $type => $list){
+        $qty = count($list);
+        }
+        return view('cart.index', compact(['products', 'quantity', 'qty']));
+
+    }
     /**
      * Display the specified resource.
      *

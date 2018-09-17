@@ -19,6 +19,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Reviews</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/viewcart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Shopping Cart</a>
+            </li>
             <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             {{ Auth::user()->name }} <span class="caret"></span>

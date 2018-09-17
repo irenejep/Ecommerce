@@ -24,7 +24,7 @@
     <td>{{$product->product_description}}</td>
     <td> <a href='/productfeatures/{{ $product->id }}' class="btn btn-primary">Features</a></td>
     <td> <a href='/products/show/{{ $product->id }}' class="btn btn-primary">View</a></td>
-    <td> <a class="btn btn-primary" href='/addtocart/{{ $product->id }}'><i class="fas fa-cart-plus"></i>Add to cart</a></td>
+    <td> <a class="btn btn-primary" href='/addtocart/{{ $product->id }}'><i class="fas fa-cart-plus"></i>Remove from cart</a></td>
 </tr>
 @endforeach
 @endsection

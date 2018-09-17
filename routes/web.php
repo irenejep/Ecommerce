@@ -46,8 +46,12 @@ Route::get('/products/edit/{id}', 'ProductController@edit');
 Route::get('/products/show/{id}', 'ProductController@show');
 Route::patch('/products/{id}', 'ProductController@update');
 Route::delete('/products/{id}', 'ProductController@destroy');
-Route::get('/addtocart/{id}', 'ProductController@addtocart');
+Route::post('/addtocart', 'ProductController@addtocart');
+Route::get('/viewcart', 'ProductController@viewcart');
 
+Route::delete('/removefromcart/{id}', 'OrderitemController@removefromcart');
+Route::post('/cart', 'OrderitemController@storecart');
+Route::get('/quantity{id}', 'OrderitemController@quantity');
 
 Route::get('/productfeatures', 'ProductfeatureController@index');
 Route::get('productfeatures/create', 'ProductfeatureController@create');

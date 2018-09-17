@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layoutAdmin')
 
 @section('content')
 <table class = "table table-condensed table-striped table-bordered table-hover">
