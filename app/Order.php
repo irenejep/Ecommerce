@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     
-    protected $guarded = [];
+    protected $fillable = ['user_id', 'order_status_id'];
 
     public function users(){
 
@@ -17,5 +17,10 @@ class Order extends Model
     public function orderitems(){
 
         return $this->hasMany(Order_item::class);
+    }
+
+    public function orderstatuses(){
+
+        return $this->hasMany(Order_status::class);
     }
 }

@@ -25,7 +25,7 @@ class OrderitemController extends Controller
 
             $products = Product::all();
 
-            Order_item::create(request(['product_id','price', 'quantity']));
+            Order_item::create(request(['product_id', 'user_id','price', 'quantity']));
 
             session()->flash("success_message", "You have added a new item to cart");
 

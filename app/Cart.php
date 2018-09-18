@@ -19,7 +19,7 @@ class Cart
         }
     }
 
-    public function add($item, $id){
+    public function add($item, $id, $quantity=1){
         $storedItem = ['product_quantity'=>0, 'product_price'=>$item->price, 'item'=>$item];
         if($this->items){
             if(array_key_exists($id, $this->items)){

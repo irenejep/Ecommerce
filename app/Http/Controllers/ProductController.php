@@ -108,7 +108,7 @@ class ProductController extends Controller
             
     }
 
-    public function viewcart($id)
+    public function viewcart()
     {
         $products = Product::all();
         $quantity = Order_item::orderBy('product_id')->get();

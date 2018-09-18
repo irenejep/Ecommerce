@@ -28,7 +28,7 @@
                     </div>
                 </div>
             <li class="nav-item">
-                <a class="nav-link" href="#">Orders</a>
+                <a class="nav-link" href="ordersbuyer">Orders</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Reviews</a>
@@ -66,13 +66,13 @@
                     <div class="text-primary"> {{$product->product_status}}</div>
                     <div class='caption'>Price: KES <b>{{$product->product_price}}</b></div>
                     <div class='caption'>Description: {{$product->product_description}}</div>
-                    <div class='caption'> <a href='/products/show/{{ $product->id }}'>See More</a></div>
+                    <div class='caption'> <a class = "btn btn-success"href='/products/show/{{ $product->id }}'>Details</a></div>
                     <div class='caption'> 
                         <form action="/cart" method="post">
                             {{csrf_field()}}
                             <input type="hidden"name="product_id" value="{{$product->id}}">
                             <input type="hidden" name="item" value="{{$product->product_name}}">
-                            <input type="hidden"name="qty" value="{{$product->product_name}}">
+                            <input type="hidden"name="qty" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="price" value="{{$product->product_price}}">
                             <button type="submit" class="btn btn-primary">Add to cart</button>
                         </form>

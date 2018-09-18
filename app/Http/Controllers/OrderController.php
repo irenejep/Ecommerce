@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Product;
+
+use App\Order;
+
+use DB;
+
 class OrderController extends Controller
 {
     /**
@@ -13,7 +19,29 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = DB::table('orders')
+                ->join('users', 'user_id','=', 'users.id')
+                ->join('order_statuses', 'order_status_id','order_statuses.id' )
+                ->select('orders.*', 'order_statuses.order_status_name', 'users.name')
+                ->get();
+
+                return view('orders.indexSeller', compact(['orders']));
+    }
+
+    public function finish(Request $request, $id){
+        $order =DB::table('orders')
+         ->update(['order_status_id'=>3]);
+         return redirect('/orders');
+    }
+
+    public function indexbuyer(){
+        $orders = DB::table('orders')
+                ->join('users', 'user_id','=', 'users.id')
+                ->join('order_statuses', 'order_status_id','order_statuses.id' )
+                ->select('orders.*', 'order_statuses.order_status_name', 'users.name')
+                ->where('user_id', 2)
+                ->get();
+                return view('orders.indexBuyer', compact(['orders']));
     }
 
     /**
@@ -34,7 +62,19 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),[
+        ]);
+
+            $products = Product::all();
+
+            $totalItems = DB::table('order_items')
+            ->count();
+
+            Order::create(request(['user_id', 'order_status_id']));
+
+            session()->flash("success_message", "You have added a new item to orders");
+
+            return view('productBuyer.indx', compact(['products', 'totalItems']));
     }
 
     /**
@@ -45,7 +85,12 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $orders = DB::table('orders')
+        ->join('users', 'user_id','=', 'users.id')
+        ->join('order_statuses', 'order_status_id','order_statuses.id' )
+        ->select('orders.*', 'order_statuses.order_status_name', 'users.name')
+        ->get();
+        return view('orders.show', compact('orders'));
     }
 
     /**
@@ -79,6 +124,12 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        Order::where('id', $id)
+           ->delete();
+
+           session()->flash("success_message_delete", "You have sucessfully canceled order of this item");
+
+        return redirect('/ordersbuyer');
     }
 }
