@@ -73,8 +73,6 @@ class OrderController extends Controller
             $totalItems = DB::table('orders')
                         ->where('order_status_id', 1)
                         ->count();
-                        dd($totalItems);
-
             $quantity = DB::table('orders')
             ->where('product_id', 1)
             ->count();
