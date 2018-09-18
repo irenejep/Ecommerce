@@ -24,4 +24,6 @@
     <td> <a href='/productfeatures/{{ $product->id }}' class="btn btn-primary">Features</a></td>
     <td> <a href=''class="btn btn-primary">View images</a></td>
 </tr>
+
+<a href="/productsBuyer" class="btn btn-warning">Back</a>
 @endsection

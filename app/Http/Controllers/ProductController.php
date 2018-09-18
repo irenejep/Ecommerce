@@ -118,6 +118,7 @@ class ProductController extends Controller
         foreach ($quantity as $type => $list){
         $qty = count($list);
         }
+        dd($qty);
         return view('cart.index', compact(['products', 'quantity', 'qty']));
 
     }

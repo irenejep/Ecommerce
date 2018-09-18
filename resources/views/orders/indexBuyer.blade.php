@@ -12,7 +12,7 @@
                 <th colspan="2">Actions</th>
             </tr>
             @foreach($orders as $order)
-            <tr>
+            <tr id="cartitems">
                 <td>{{ $order->id }}</td>
                 <td>{{$order->order_status_name}}</td>
                 <td>{{$order->name}}</td>

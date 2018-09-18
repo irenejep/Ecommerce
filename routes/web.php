@@ -50,7 +50,7 @@ Route::get('/addtocart/{id}', 'ProductController@addtocart');
 Route::get('/viewcart', 'ProductController@viewcart');
 
 Route::delete('/removefromcart/{id}', 'OrderitemController@removefromcart');
-Route::post('/cart', 'OrderitemController@storecart');
+Route::post('/cart', 'OrderController@storecart');
 Route::get('/quantity{id}', 'OrderitemController@quantity');
 
 Route::get('/productfeatures', 'ProductfeatureController@index');
@@ -63,7 +63,7 @@ Route::delete('/productfeatures/{id}', 'ProductfeatureController@destroy');
 
 Route::get('/productsBuyer', 'ProductController@buyer');
 
-Route::post('/placeorder', 'OrderController@store');
+Route::post('/placeorder/{id}', 'OrderController@placeorder');
 Route::get('/orders', 'OrderController@index');
 Route::get('/complete/{id}', 'OrderController@finish');
 Route::get('/vieworder/{id}', 'OrderController@show');

@@ -71,8 +71,9 @@
                         <form action="/cart" method="post">
                             {{csrf_field()}}
                             <input type="hidden"name="product_id" value="{{$product->id}}">
-                            <input type="hidden" name="item" value="{{$product->product_name}}">
-                            <input type="hidden"name="qty" value="{{ Auth::user()->id }}">
+                            <input type="hidden"name="user_id" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="qty" value="1">
+                            <input type="hidden"name="order_status_id" value="1">
                             <input type="hidden" name="price" value="{{$product->product_price}}">
                             <button type="submit" class="btn btn-primary">Add to cart</button>
                         </form>

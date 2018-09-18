@@ -23,9 +23,15 @@ class OrderController extends Controller
                 ->join('users', 'user_id','=', 'users.id')
                 ->join('order_statuses', 'order_status_id','order_statuses.id' )
                 ->select('orders.*', 'order_statuses.order_status_name', 'users.name')
+                ->where('seller_id', 'orders.seller_id')
                 ->get();
 
                 return view('orders.indexSeller', compact(['orders']));
+    }
+    public function placeorder(Request $request, $id){
+        $order =DB::table('orders')
+         ->update(['order_status_id'=>2]);
+         return redirect('/orders');
     }
 
     public function finish(Request $request, $id){
@@ -39,7 +45,7 @@ class OrderController extends Controller
                 ->join('users', 'user_id','=', 'users.id')
                 ->join('order_statuses', 'order_status_id','order_statuses.id' )
                 ->select('orders.*', 'order_statuses.order_status_name', 'users.name')
-                ->where('user_id', 2)
+                ->where('user_id', 'users.id')
                 ->get();
                 return view('orders.indexBuyer', compact(['orders']));
     }
@@ -52,6 +58,27 @@ class OrderController extends Controller
     public function create()
     {
         //
+    }
+    public function storecart(Request $request)
+    {
+        $this->validate(request(),[
+        ]);
+
+            $products = Product::all();
+
+            Order::create(request(['order_status_id', 'product_id', 'qty', 'user_id', 'price']));
+
+            session()->flash("success_message", "You have added a new item to cart");
+
+            $totalItems = DB::table('orders')
+                        ->where('order_status_id', 1)
+                        ->count();
+
+            $quantity = DB::table('orders')
+            ->where('product_id', 1)
+            ->count();
+
+            return view('cart.index', compact(['totalItems', 'products', 'quantity']));
     }
 
     /**
