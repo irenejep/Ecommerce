@@ -8,6 +8,8 @@ use App\Cart;
 
 use App\Product;
 
+use App\Order;
+
 use Session;
 
 use DB;
@@ -111,15 +113,15 @@ class ProductController extends Controller
     public function viewcart()
     {
         $products = Product::all();
-        $quantity = Order_item::orderBy('product_id')->get();
+        $quantity = Order::orderBy('product_id')->get();
         $quantity = $quantity->groupBy(function ($member) {
         return $member->product_id;
         })->all();
         foreach ($quantity as $type => $list){
         $qty = count($list);
         }
-        dd($qty);
-        return view('cart.index', compact(['products', 'quantity', 'qty']));
+        
+        return view('productBuyer.indx', compact(['products', 'quantity', 'qty']));
 
     }
     /**

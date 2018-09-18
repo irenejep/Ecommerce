@@ -23,7 +23,12 @@
                     <button type="submit" class="btn btn-warning">Remove from cart</button>
                 </form>
             </td>
-            
+            <td>
+                <form action="" method="post">
+                    {{csrf_field()}}
+                    <button type="submit" class="btn btn-primary" onsubmit()>Place order</button>
+                </form>
+            </td>
         </tr>
         @endforeach
     </table>

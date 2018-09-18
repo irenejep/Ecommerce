@@ -66,19 +66,20 @@ class OrderController extends Controller
 
             $products = Product::all();
 
-            Order::create(request(['order_status_id', 'product_id', 'qty', 'user_id', 'price']));
+            Order::create(request(['order_status_id', 'product_id', 'user_id', 'price']));
 
             session()->flash("success_message", "You have added a new item to cart");
 
             $totalItems = DB::table('orders')
                         ->where('order_status_id', 1)
                         ->count();
+                        dd($totalItems);
 
             $quantity = DB::table('orders')
             ->where('product_id', 1)
             ->count();
 
-            return view('cart.index', compact(['totalItems', 'products', 'quantity']));
+            return view('productBuyer.indx', compact(['totalItems', 'products', 'quantity']));
     }
 
     /**
