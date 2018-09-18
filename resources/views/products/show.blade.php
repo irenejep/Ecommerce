@@ -22,7 +22,6 @@
     <td>{{$product->product_image}}</td>
     <td>{{$product->product_description}}</td>
     <td> <a href='/productfeatures/{{ $product->id }}' class="btn btn-primary">Features</a></td>
-    <td> <a href=''class="btn btn-primary">View images</a><td>
-    <td> <a class="btn btn-primary" href='/addtocart/{{ $product->id }}'><i class="fas fa-cart-plus"></i>Add to cart</a></td>
+    <td> <a href=''class="btn btn-primary">View images</a></td>
 </tr>
 @endsection
