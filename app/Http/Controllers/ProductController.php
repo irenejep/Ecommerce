@@ -71,9 +71,7 @@ class ProductController extends Controller
 
         $request->session()->put('cart', $cart);
 
-      
-        // dd($request->session()->get('cart'));
-        return view('cart.index', compact('cart', 'product','products', 'totalItem', 'orderitems'));
+        return view('cart.index', compact('products'));
     }
 
     /**
@@ -120,7 +118,7 @@ class ProductController extends Controller
         foreach ($quantity as $type => $list){
         $qty = count($list);
         }
-        
+
         return view('productBuyer.indx', compact(['products', 'quantity', 'qty']));
 
     }

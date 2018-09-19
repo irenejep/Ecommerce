@@ -36,7 +36,7 @@
             </li>
             <li class="nav-item">
             
-                <a class="nav-link" href="/viewcart"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge badge-light">{{$totalItems}}</span></a>
+                <a class="nav-link" href="/viewcart"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge badge-light"></span></a>
             </li>
             <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -58,9 +58,8 @@
 </nav>
 
 @foreach($products as $product)
-    <div class="container"> 
         <div class='text-center'>
-            <div class='col-md-3 col-sm-6 hero-feature'>
+            <div class='col-md-4 col-sm-6 hero-feature'>
                 <div class="thumbnail">
                     <img src="images/{{$product->product_image}}" class='img-responsive' style='width:100%; height:200px' alt='Image'>
                     <div class='caption'><h4><b>{{$product->product_name}}</b></h4><div>
@@ -69,7 +68,7 @@
                     <div class='caption'>Description: {{$product->product_description}}</div>
                     <div class='caption'> <a class = "btn btn-success"href='/products/show/{{ $product->id }}'>Details</a></div>
                     <div class='caption'> 
-                        <form action="/cart" method="post">
+                        <form action="/cart/{{$product->id }}" method="post">
                             {{csrf_field()}}
                             <input type="hidden"name="product_id" value="{{$product->id}}">
                             <input type="hidden" name="product_name" value="{{$product->product_name}}">
@@ -86,7 +85,6 @@
                 </div>
             </div>
         </div>
-    </div>
 @endforeach
     <div class="container">
     @if(count($errors))

@@ -2,7 +2,9 @@
 
 namespace App;
 
-class Cart
+use Illuminate\Database\Eloquent\Model;
+
+class Cart extends Model
 {
     public function product(){
         $this->hasMany(Product::class);

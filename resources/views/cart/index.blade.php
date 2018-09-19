@@ -1,10 +1,10 @@
 @extends('layouts.layoutBuyer')
 
 @section('content')
+@if(Session::has('cart'))
 <div id="table">
     <table class = "table table-condensed table-striped table-bordered table-hover">
         <tr>
-            <th>#</th>
             <th>Product Name</th>
             <th>quantity</th>
             <th>Price</th>
@@ -12,10 +12,9 @@
         </tr>
         <tr>  
         @foreach($products as $product)
-            <td>{{$product->id}}</td>
             <td>{{$product->product_name}}</td>
-            <td>1</td>
-            <td>{{$product->product_price}}</td>
+            <td> {{$product->qty}}</td>
+            <td> {{$product->product_price}}</td>
             <td>  
                 <form class="form-horizontal" action="/removefromcart/{{$product->id}}" method="POST">
                     {{csrf_field()}}
@@ -24,7 +23,7 @@
                 </form>
             </td>
             <td>
-                <form action="" method="post">
+                <form action="/complete/{{$product->id}}" method="post">
                     {{csrf_field()}}
                     <button type="submit" class="btn btn-primary" onsubmit()>Place order</button>
                 </form>
@@ -40,4 +39,5 @@
         document.getElementById("table").style.display="none";
     }
 </script>
+@endif
 @endsection
