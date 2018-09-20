@@ -73,52 +73,42 @@ class OrderController extends Controller
     }
     public function storecart(Request $request, $id)
     {
-        
-
-        if( $request->order_id ) {
-            $order = Order::find($request->order_id);
-            $sellers = $order->users()->where('user_id', $request->seller_id)->get();
-            $orderItem = new Order_item;
-            $orderItem->order_id = $request->order_id;
-            $orderItem->product_id = $request->product_id;
-            $orderItem->quantity = $request->quantity;
-            $orderItem->price = $request->price;
-            $orderItem->user_id = $request->user_id;
-            $orderItem->save();
-
-            $item = Order_item::where('order_id', $request->order_id)
-            ->where('product_id', $request->product_id)->first();
-
-            echo json_encode($item);
-
-        } 
-        else {
-            $order_number = time();
-
-            $order = new Order;
-            $order->user_id = $request->user_id;
-            $order->product_id = $request->product_id;
-            $order->price = $request->price;
-            $order->order_status_id = 1;
-            $order->order_number = $order_number;
-            $order->save();
-
-            //get order id
-            $NewOrder = Order::where('user_id', $request->user_id)
+        $orders = Order::where('user_id', Auth::user()->id)
             ->where('order_status_id', 1)
-            ->get()->first();
-            $order_id = $NewOrder->id;
+            ->get();
+            if(!count($orders)){
+                $order_number = time();
+                $order = new Order;
+                $order->user_id = $request->user_id;
+                $order->product_id = $request->product_id;
+                $order->price = $request->price;
+                $order->order_status_id = 1;
+                $order->order_number = $order_number;
+                $order->save();  
 
-            //create order item
-            $orderItem = new Order_item;
-            $orderItem->order_id = $order_id;
-            $orderItem->product_id = $request->product_id;
-            $orderItem->quantity = $request->quantity;
-            $orderItem->price = $request->price;
-            $orderItem->save();
+                if($order->save()){
+                    $order_id=$order->id;
+                }
+                $orderItem = new Order_item;
+                $orderItem->order_id = $order_id;
+                $orderItem->product_id = $request->product_id;
+                $orderItem->quantity = 1;
+                $orderItem->price = $request->price;
+                $orderItem->save();
 
-            $item = Order_item::where('order_id', $order_id)
-            ->where('product_id', $request->product_id)->first();
+            }
+            else{
+                $order = Order::where('user_id', Auth::user()->id)
+                ->where('order_status_id', 1)
+                ->first();
+                $order_id = $order->id;
+                $orderItem = new Order_item;
+                $orderItem->order_id = $order_id;
+                $orderItem->product_id = $request->product_id;
+                $orderItem->quantity = 1;
+                $orderItem->price = $request->price;
+                $orderItem->save();
+            }
 
             $orderitems=Order_item::all();
             $product = Product::find($id);
@@ -127,7 +117,6 @@ class OrderController extends Controller
             $cart->add($product, $product->id);
     
             $request->session()->put('cart', $cart);
-        }
         return back();
     }
 
@@ -137,6 +126,9 @@ class OrderController extends Controller
         $oldcart = Session::get('cart');
         $cart = new Cart($oldcart);
 
+        $orders = DB::table('order_items')
+                ->where('seller_id', 'orders.seller_id')
+                ->get();
         return view('cart.index', compact(['products','products'=>$cart->items,'totalprice'=>$cart->totalprice, 'qty'=>$cart->totalQty]));
 
     }
