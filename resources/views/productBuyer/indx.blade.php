@@ -74,6 +74,7 @@
                             <input type="hidden" name="product_name" value="{{$product->product_name}}">
                             <input type="hidden"name="user_id" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="price" value="{{$product->product_price}}">
+                            <input type="hidden" name="seller_id" value="{{$product->user_id}}">
                             <input type="hidden" name="order_status_id" value="1">
                             <button type="submit" class="btn btn-primary">Add to cart</button>
                         </form>

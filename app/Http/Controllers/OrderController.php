@@ -80,6 +80,7 @@ class OrderController extends Controller
                 $order_number = time();
                 $order = new Order;
                 $order->user_id = $request->user_id;
+                $order->seller_id = $request->seller_id;
                 $order->product_id = $request->product_id;
                 $order->price = $request->price;
                 $order->order_status_id = 1;
@@ -94,6 +95,7 @@ class OrderController extends Controller
                 $orderItem->product_id = $request->product_id;
                 $orderItem->quantity = 1;
                 $orderItem->price = $request->price;
+                $orderItem->user_id = $request->user_id;
                 $orderItem->save();
 
             }
@@ -106,30 +108,28 @@ class OrderController extends Controller
                 $orderItem->order_id = $order_id;
                 $orderItem->product_id = $request->product_id;
                 $orderItem->quantity = 1;
+                $orderItem->user_id = $request->user_id;
                 $orderItem->price = $request->price;
                 $orderItem->save();
             }
 
-            $orderitems=Order_item::all();
-            $product = Product::find($id);
-            $oldCart = Session::has('cart') ? Session::get('cart'):null;
-            $cart = new Cart($oldCart);
-            $cart->add($product, $product->id);
+        //     $orderitems = Order_item::all();
+        //     $product = Product::find($id);
+        //     $oldCart = Session::has('cart') ? Session::get('cart'):null;
+        //     $cart = new Cart($oldCart);
+        //     $cart->add($product, $product->id);
     
-            $request->session()->put('cart', $cart);
+        //     $request->session()->put('cart', $cart);
         return back();
     }
 
     public function viewcart()
     {
         $products = Product::all();
-        $oldcart = Session::get('cart');
-        $cart = new Cart($oldcart);
-
         $orders = DB::table('order_items')
-                ->where('seller_id', 'orders.seller_id')
+                ->where('user_id', Auth::user()->id)
                 ->get();
-        return view('cart.index', compact(['products','products'=>$cart->items,'totalprice'=>$cart->totalprice, 'qty'=>$cart->totalQty]));
+        return view('cart.index', compact('orders', 'products'));
 
     }
 

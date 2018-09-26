@@ -42,7 +42,7 @@ class OrderitemController extends Controller
 
            session()->flash("success_message_delete", "You have sucessfully removed product from cart");
 
-        return view('cart.index', compact('products'));
+        return back();
     }
 
     public function quantity($product_id){
