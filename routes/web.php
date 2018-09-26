@@ -70,3 +70,5 @@ Route::get('/vieworder/{id}', 'OrderController@show');
 Route::get('/ordersbuyer', 'OrderController@indexbuyer');
 Route::delete('/cancelorder/{id}', 'OrderController@destroy');
 
+
+Route::get('/myJson', 'ProductController@myJson');

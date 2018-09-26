@@ -54,11 +54,15 @@ class ProductController extends Controller
         $quantity = DB::table('order_items')
         ->orderBy('product_id')
         ->count();
-        // dd($quantity);
+        dd(json_encode($products));
        
 
         return view('productBuyer.indx', compact('products', 'totalItems', 'quantity'));
 
+    }
+    public function myJson(){
+        $products = Product::all();
+        return $products;
     }
 
     public function addtocart(Request $request, $id){
