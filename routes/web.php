@@ -72,3 +72,4 @@ Route::delete('/cancelorder/{id}', 'OrderController@destroy');
 
 
 Route::get('/products/myJson', 'ProductController@myJson');
+Route::get('/addProductJson', 'ProductController@addProductJson');

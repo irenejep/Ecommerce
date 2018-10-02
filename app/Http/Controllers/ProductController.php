@@ -65,6 +65,10 @@ class ProductController extends Controller
         return $products;
     }
 
+    public function addProductJson(){
+        return [];
+    }
+
     public function addtocart(Request $request, $id){
         $products = Product::all();
         $orderitems=Order_item::all();
