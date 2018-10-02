@@ -43,7 +43,7 @@ class ProductController extends Controller
         ->where('product_id', 2)
         ->count();
     }
-
+    
     public function buyer()
     {
         $products = Product::all();
@@ -54,8 +54,6 @@ class ProductController extends Controller
         $quantity = DB::table('order_items')
         ->orderBy('product_id')
         ->count();
-        return $products;
-       
 
         return view('productBuyer.indx', compact('products', 'totalItems', 'quantity'));
 
