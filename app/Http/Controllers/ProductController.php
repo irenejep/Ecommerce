@@ -54,7 +54,7 @@ class ProductController extends Controller
         $quantity = DB::table('order_items')
         ->orderBy('product_id')
         ->count();
-        dd(json_encode($products));
+        return $products;
        
 
         return view('productBuyer.indx', compact('products', 'totalItems', 'quantity'));
