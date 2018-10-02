@@ -71,4 +71,4 @@ Route::get('/ordersbuyer', 'OrderController@indexbuyer');
 Route::delete('/cancelorder/{id}', 'OrderController@destroy');
 
 
-Route::get('/myJson', 'ProductController@myJson');
+Route::get('/products/myJson', 'ProductController@myJson');

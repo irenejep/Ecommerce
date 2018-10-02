@@ -61,7 +61,9 @@ class ProductController extends Controller
 
     }
     public function myJson(){
-        $products = Product::all();
+        $products= DB::table('products')
+        ->get();
+     
         return $products;
     }
 
