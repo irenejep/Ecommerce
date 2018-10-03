@@ -69,6 +69,13 @@ class ProductController extends Controller
         return [];
     }
 
+    public function categoriesJson(){
+        $categories= DB::table('categories')
+        ->get();
+
+        return $categories;
+    }
+
     public function addtocart(Request $request, $id){
         $products = Product::all();
         $orderitems=Order_item::all();
@@ -112,7 +119,7 @@ class ProductController extends Controller
 
             session()->flash("success_message", "You have added a new products");
     
-            return redirect('/products');
+            return response()->json();
             
     }
 
