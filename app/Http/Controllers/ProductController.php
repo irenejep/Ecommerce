@@ -159,7 +159,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        session()->flash("success_message_edit", "You have edited category");
+        // session()->flash("success_message_edit", "You have edited category");
 
         return view('products.edit', compact('product'));
     }
